@@ -14,8 +14,10 @@
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
 
+/* charity: water's brand typeface is Proxima Nova (a paid font).
+   Montserrat is a free Google Font with the same geometric look, so we use it as the stand-in. */
 body {
-  font-family: 'Montserrat', Arial, sans-serif;
+  font-family: 'Proxima Nova', 'Montserrat', Arial, sans-serif;
   background: var(--cw-cream);
   color: var(--cw-black);
   min-height: 100vh;
@@ -188,6 +190,7 @@ h1 { font-size: clamp(2rem, 6vw, 2.75rem); font-weight: 800; }
   padding: 20px;
   background: rgba(255, 247, 225, 0.94);
 }
+.overlay { overflow-y: auto; }
 .overlay.hidden { display: none; }
 .overlay h2 { font-size: clamp(1.3rem, 5vw, 1.8rem); font-weight: 800; }
 .overlay p { max-width: 380px; }
@@ -202,6 +205,62 @@ h1 { font-size: clamp(2rem, 6vw, 2.75rem); font-weight: 800; }
 }
 .mini-drop.clean { background: var(--cw-blue); }
 .mini-drop.dirty { background: var(--dirty); }
+
+/* ---------- Difficulty picker ---------- */
+.difficulty { display: flex; gap: 8px; }
+.diff-btn {
+  font: inherit;
+  font-weight: 800;
+  font-size: 0.9rem;
+  padding: 8px 16px;
+  border-radius: 999px;
+  border: 2px solid var(--cw-black);
+  background: #fff;
+  cursor: pointer;
+}
+.diff-btn.selected { background: var(--cw-black); color: var(--cw-yellow); }
+.diff-btn:focus-visible, .btn:focus-visible, .icon-btn:focus-visible { outline: 3px solid var(--cw-blue); outline-offset: 2px; }
+.diff-desc { font-size: 0.85rem; color: #444; min-height: 1.2em; }
+.best-score { font-size: 0.85rem; font-weight: 700; }
+.best-score:empty { display: none; }
+
+/* Water fact shown on the results screen */
+.fact {
+  background: #fff;
+  border-left: 5px solid var(--cw-yellow);
+  border-radius: 8px;
+  padding: 10px 14px;
+  font-size: 0.85rem;
+  text-align: left;
+}
+
+/* ---------- Header actions ---------- */
+.header-actions { display: flex; align-items: center; gap: 10px; }
+.icon-btn {
+  font-size: 1.2rem;
+  background: #fff;
+  border: 2px solid var(--cw-black);
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+}
+
+/* Missed clean drop splash on the ground */
+.splash {
+  position: absolute;
+  bottom: 18px;
+  width: 30px;
+  height: 8px;
+  margin-left: -15px;
+  border-radius: 50%;
+  background: var(--cw-blue);
+  opacity: 0.7;
+  z-index: 1;
+  pointer-events: none;
+  animation: splash 0.5s forwards;
+}
+@keyframes splash { to { transform: scaleX(2.2); opacity: 0; } }
 
 /* ---------- Message + buttons ---------- */
 .message { min-height: 1.6em; margin: 14px 0; font-weight: 600; }
@@ -229,14 +288,28 @@ h1 { font-size: clamp(2rem, 6vw, 2.75rem); font-weight: 800; }
 /* ---------- Confetti + footer ---------- */
 #confetti { position: fixed; inset: 0; pointer-events: none; z-index: 100; }
 
-footer {
+/* ---------- Footer with charity: water links ---------- */
+.site-footer {
   text-align: center;
-  padding: 16px;
+  padding: 20px 16px;
   font-size: 0.85rem;
   background: var(--cw-black);
   color: #fff;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
-footer a { color: var(--cw-yellow); }
+.footer-links { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px 22px; }
+.site-footer a { color: var(--cw-yellow); font-weight: 600; }
+.site-footer a.footer-donate {
+  background: var(--cw-yellow);
+  color: var(--cw-black);
+  text-decoration: none;
+  padding: 4px 14px;
+  border-radius: 999px;
+  font-weight: 800;
+}
+.footer-credit { font-size: 0.7rem; color: #aaa; }
 
 @keyframes shake {
   25% { transform: translateX(-6px); }

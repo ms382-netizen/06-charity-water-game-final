@@ -18,7 +18,11 @@
            onerror="this.remove(); document.getElementById('wordmark').hidden = false;">
       <span id="wordmark" class="wordmark" hidden>charity: water</span>
     </div>
-    <a class="donate-link" href="https://www.charitywater.org/donate" target="_blank" rel="noopener">Donate</a>
+    <div class="header-actions">
+      <!-- Mute / unmute sound effects -->
+      <button id="sound-btn" class="icon-btn" aria-pressed="false" aria-label="Mute sound">🔊</button>
+      <a class="donate-link" href="https://www.charitywater.org/donate" target="_blank" rel="noopener">Donate</a>
+    </div>
   </header>
 
   <main class="game-wrapper">
@@ -45,10 +49,21 @@
       <div id="overlay" class="overlay">
         <h2 id="overlay-title">Ready to bring clean water?</h2>
         <p id="overlay-text">Tap clean drops before they hit the ground. Reach 20 points in 30 seconds to win!</p>
+
+        <!-- Difficulty picker: script.js reads data-level from each button -->
+        <div class="difficulty" role="group" aria-label="Choose difficulty">
+          <button class="diff-btn" data-level="easy">Easy</button>
+          <button class="diff-btn selected" data-level="normal">Normal</button>
+          <button class="diff-btn" data-level="hard">Hard</button>
+        </div>
+        <p id="diff-desc" class="diff-desc"></p>
         <div class="legend">
           <div class="legend-item"><span class="mini-drop clean"></span> Clean drop: <strong>+1</strong></div>
-          <div class="legend-item"><span class="mini-drop dirty"></span> Dirty drop: <strong>−2</strong></div>
+          <div class="legend-item"><span class="mini-drop dirty"></span> Dirty drop: <strong id="dirty-points">−2</strong></div>
         </div>
+        <p id="best-score" class="best-score"></p>
+        <!-- A real fact about the water crisis shows here after each game -->
+        <p id="fact" class="fact" hidden></p>
       </div>
     </div>
 
@@ -63,8 +78,15 @@
   <!-- Confetti layer for the win celebration -->
   <canvas id="confetti"></canvas>
 
-  <footer>
-    Every drop counts. <a href="https://www.charitywater.org" target="_blank" rel="noopener">Learn how charity: water brings clean water to communities around the world.</a>
+  <footer class="site-footer">
+    <p class="footer-tagline">Every drop counts. 100% of public donations to charity: water fund clean water projects.</p>
+    <nav class="footer-links" aria-label="charity: water links">
+      <a href="https://www.charitywater.org" target="_blank" rel="noopener">charitywater.org</a>
+      <a href="https://www.charitywater.org/about/mission" target="_blank" rel="noopener">Our Mission</a>
+      <a href="https://www.charitywater.org/stories" target="_blank" rel="noopener">Stories of Impact</a>
+      <a href="https://www.charitywater.org/donate" target="_blank" rel="noopener" class="footer-donate">Donate Now</a>
+    </nav>
+    <p class="footer-credit">Water Drop is a student project by Maryam Salman and is not an official charity: water game.</p>
   </footer>
 
   <script src="script.js"></script>
